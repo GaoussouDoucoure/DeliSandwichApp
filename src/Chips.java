@@ -17,11 +17,11 @@ public class Chips extends Item{
     }
 
     public static void toStringChipFlavors() {
-        int i = 1;
+        int index = 1;
         System.out.println("List of Chip Flavors: ");
         for (Chips flavors : chipFlavors) {
-            System.out.println(i + ".) " + flavors.getChipType() + " ($1.50)");
-            i++;
+            System.out.println(index + ".) " + flavors.getChipType() + " ($1.50)");
+            index++;
         }
     }
 
