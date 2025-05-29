@@ -42,11 +42,11 @@ public class Drink extends Item {
     }
 
     public static void toStringDrinkFlavors() {
-        int i = 1;
+        int index = 1;
         System.out.println("List of Drink Flavors: ");
         for (Drink flavors : drinkFlavors) {
-            System.out.println(i + ".) " + flavors.getDrinkFlavor());
-            i++;
+            System.out.println(index + ".) " + flavors.getDrinkFlavor());
+            index++;
         }
     }
 
