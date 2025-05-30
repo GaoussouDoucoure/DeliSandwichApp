@@ -20,7 +20,7 @@ public class Chips extends Item {
 
     public static void toStringChipFlavors() {
         int index = 1;
-        System.out.println("List of Chip Flavors: ");
+        System.out.println("\nList of Chip Flavors: ");
         for (Chips flavors : chipFlavors) {
             System.out.println(index + ".) " + flavors.getChipType() + " ($1.50)");
             index++;

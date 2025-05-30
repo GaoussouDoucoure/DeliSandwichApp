@@ -16,11 +16,13 @@ public class UserInterface implements Screens {
 
     public static void homeScreen(){
         System.out.println("""
+                
                 ******************************************************
-                ***** WELCOME TO YOUR BEST SANDWICH SHOP IN TOWN *****
+                ********  WELCOME TO DOUC DELI SANDWICH SHOP  ********
+                ********  YOUR #1 BEST SANDWICH SHOP IN TOWN  ********
                 ******************************************************
                 
-                Please select an option to proceed
+                Let's get started! Please select an option.
                 [1] New Order
                 [2] Exit
                 """);
@@ -29,7 +31,7 @@ public class UserInterface implements Screens {
 
         switch (choice){
             case "1" -> orderScreen();
-            case "2" -> System.out.println("\nThank you for visiting our shop. See you next time :)");
+            case "2" -> System.out.println("\nThanks for stopping by! Hope to see you again soon :)");
             default -> {
                 System.out.printf("\nYou entered an invalid option: %s. Please try again!\n\n", choice);
                 homeScreen();
@@ -39,6 +41,7 @@ public class UserInterface implements Screens {
 
     public static void orderScreen(){
         System.out.println("""
+                
                 >>>>> Select an Option <<<<<
                 [1] Add Custom Sandwich
                 [2] Add Signature Sandwich
@@ -57,7 +60,8 @@ public class UserInterface implements Screens {
             case "4" -> addChips();
             case "5" -> checkOut();
             case "0" -> {
-                System.out.println("\nclear the cart and go back to Home Screen\n");
+                cancelOrder();
+                System.out.println("\n*** Going back to the Home Screen.. ***\n");
                 homeScreen();
             }
             default -> {
@@ -70,11 +74,12 @@ public class UserInterface implements Screens {
     public static void addCustomSandwich(){
         Sandwich sandwich = new Sandwich();
         System.out.println("""
-                >>>>> Choose Sandwich Size <<<<<
                 
+                >>>>> Choose Sandwich Size <<<<<
                 [1] Small/4 Inch — ($5.50)
-                [2] Medium/8 Inch — ($5.50)
-                [3] Large/12 Inch — ($5.50)
+                [2] Medium/8 Inch — ($7.00)
+                [3] Large/12 Inch — ($8.50)
+                [4] Go back to Order Screen
                 """);
         System.out.print("Select your sandwich size (1, 2, or 3): ");
         String sizeChoice = sc.nextLine().trim();
@@ -84,6 +89,10 @@ public class UserInterface implements Screens {
             case "1" -> size = "SMALL";
             case "2" -> size = "MEDIUM";
             case "3" -> size = "LARGE";
+            case "4" -> {
+                System.out.println("You chose to go back to the Order Screen..");
+                orderScreen();
+            }
             default -> {
                 System.out.printf("\nYou entered an invalid option for Sandwich Size: %s. Please try again!\n\n", sizeChoice);
                 addCustomSandwich();
@@ -92,6 +101,7 @@ public class UserInterface implements Screens {
         sandwich.setSandwichSize(size);
 
         System.out.println("""
+        
         >>>>> Choose Bread Type <<<<<
         [1] White
         [2] Wheat
@@ -115,6 +125,7 @@ public class UserInterface implements Screens {
         sandwich.setBreadType(bread);
 
         System.out.println("""
+                
                 >>>>> Would you like your sandwich toasted? <<<<<
                 [1] Toasted
                 [2] Not Toasted
@@ -135,6 +146,7 @@ public class UserInterface implements Screens {
         sandwich.setToasted(isToasted);
 
         System.out.println("""
+        
         >>>>> Would you like to add Toppings? <<<<<
         [1] Toppings
         [2] No Toppings
@@ -151,13 +163,13 @@ public class UserInterface implements Screens {
             }
         }
         addToCart(sandwich);
-        System.out.println("\n*** Sandwich successfully added! Now returning to the Order Screen ***");
+        System.out.println("\n*** Sandwich successfully added! Now returning to the Order Screen.. ***");
         orderScreen();
     }
 
     public static void toppingsMenu(Sandwich sandwich) {
         try {
-            System.out.println(">>>>> Which toppings would you like? <<<<<");
+            System.out.println("\n>>>>> Which toppings would you like? <<<<<");
             System.out.println("[1] Regular Toppings (Included)");
             switch (sandwich.getSandwichSize()) {
                 case "SMALL" -> {
@@ -191,7 +203,7 @@ public class UserInterface implements Screens {
                         System.out.println("[3] Cheese Toppings ($0.90)");
                 }
             }
-            System.out.print("Select your Toppings: ");
+            System.out.print("\nSelect your Toppings: ");
             String toppingsSelection = sc.nextLine().trim();
             //Topping menu
             switch (toppingsSelection) {
@@ -243,6 +255,7 @@ public class UserInterface implements Screens {
 
     public static void anotherTopping(Sandwich sandwich) {
         System.out.println("""
+        
         Would you like to add another topping?
         [1] Yes
         [2] No
@@ -263,12 +276,14 @@ public class UserInterface implements Screens {
     public static void addSignatureSandwich(){
         Sandwich signatureSandwich = new Sandwich();
         System.out.println("""
-                We have some signature sandwich made right just for you :)
-                Please choose one to proceed:
+                
+                We have some signature sandwich made right just for you!
+                Please choose one to proceed :)
                 
                 [1] BLT Sandwich
                 [2] Philly Cheese Steak
                 [3] Chicken Teriyaki
+                [4] Go back to Order Screen
                 """);
         System.out.print("Select a signature sandwich: ");
         String choice = sc.nextLine().trim();
@@ -282,6 +297,10 @@ public class UserInterface implements Screens {
             case "3" -> {
                 signatureSandwich = ctSandwich;
             }
+            case "4" -> {
+                System.out.println("You chose to go back to the Order Screen..");
+                orderScreen();
+            }
             default -> {
                 System.out.printf("\nYou entered an invalid option: %s. Please try again!\n\n", choice);
                 addSignatureSandwich();
@@ -289,17 +308,19 @@ public class UserInterface implements Screens {
         }
 
         addToCart(signatureSandwich);
-        System.out.println("\nSandwich successfully added! Now returning to the Order Screen..");
+        System.out.println("\n*** Sandwich successfully added! Now returning to the Order Screen.. ***");
         orderScreen();
     }
 
     public static void addDrink() {
         try {
             System.out.println("""
+            
             >>>>> Size of Drink <<<<<
             [1] Small ($2.00)
             [2] Medium($2.50)
             [3] Large($3.00)
+            [4] Go back to Order Screen
             """);
             System.out.print("\nPlease select a number for the size of your Drink (1, 2 or 3): ");
             String drinkSizeChoice = sc.nextLine().trim();
@@ -314,6 +335,10 @@ public class UserInterface implements Screens {
                 case "3" -> {
                     size = "LARGE";
                 }
+                case "4" -> {
+                    System.out.println("You chose to go back to the Order Screen..");
+                    orderScreen();
+                }
                 default -> {
                     System.out.printf("\nYou entered an invalid option: %s. Please try again!\n\n", drinkSizeChoice);
                     addDrink();
@@ -323,6 +348,7 @@ public class UserInterface implements Screens {
             System.out.print("\nPlease select a number for the size of your Drink: ");
             String flavourChoice = (drinkFlavors.get((Integer.parseInt(sc.nextLine().trim())) - 1)).getDrinkFlavor();
             System.out.print("""
+            
             Would you like Ice in your Drink? (1 or 2)
             [1] Yes
             [2] No
@@ -341,7 +367,7 @@ public class UserInterface implements Screens {
             }
             Drink newDrink = new Drink(size, flavourChoice, hasIce);
             addToCart(newDrink);
-            System.out.println("\n*** Drink successfully added! Now returning to the Order Screen ***");
+            System.out.println("\n*** Drink successfully added! Now returning to the Order Screen.. ***");
             orderScreen();
         } catch (Exception inputError) {
             System.out.println("\nPlease enter a valid option! Returning to Drink Menu..");
@@ -356,13 +382,19 @@ public class UserInterface implements Screens {
             String chipsChoice = (chipFlavors.get((Integer.parseInt(sc.nextLine().trim())) - 1)).getChipType();
             Chips chips = new Chips(chipsChoice);
             addToCart(chips);
-            System.out.println("\n*** Chips successfully added! Now returning to the main menu ***");
+            System.out.println("\n*** Chips successfully added! Now returning to the Order Screen.. ***");
             orderScreen();
         } catch (Exception inputError) {
             System.out.println("\nPlease enter a valid option! Returning to Chips Menu..");
             addChips();
         }
     }
+
+    public static void cancelOrder() {
+        cart.clear();
+        System.out.println("Your order has been canceled and the cart is now empty.");
+    }
+
 
     public static void addToCart(Item newItem) {
         cart.add(newItem);

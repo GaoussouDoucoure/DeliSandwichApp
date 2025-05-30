@@ -59,7 +59,7 @@ public class Toppings extends Item {
     
     public static void toStringRegularToppings(){
         int i = 1;
-        System.out.println("List of Regular Toppings: ");
+        System.out.println("\nList of Regular Toppings: ");
         for(Toppings topping : regularToppings){
             System.out.println(i + ".) " + topping.getToppingName());
             i++;
@@ -68,7 +68,7 @@ public class Toppings extends Item {
 
     public static void toStringMeatToppings() {
         int i = 1;
-        System.out.println("List of Premium Meat Toppings: ");
+        System.out.println("\nList of Premium Meat Toppings: ");
         for (Toppings topping : premiumMeatToppings) {
             System.out.println(i + ".) " + topping.getToppingName());
             i++;
@@ -78,7 +78,7 @@ public class Toppings extends Item {
 
     public static void toStringCheeseToppings() {
         int i = 1;
-        System.out.println("List of Premium Cheese Toppings: ");
+        System.out.println("\nList of Premium Cheese Toppings: ");
         for (Toppings topping : premiumCheeseToppings) {
             System.out.println(i + ".) " + topping.getToppingName());
             i++;

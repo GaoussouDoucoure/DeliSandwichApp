@@ -45,7 +45,7 @@ public class Drink extends Item {
 
     public static void toStringDrinkFlavors() {
         int index = 1;
-        System.out.println("List of Drink Flavors: ");
+        System.out.println("\nList of Drink Flavors: ");
         for (Drink flavors : drinkFlavors) {
             System.out.println(index + ".) " + flavors.getDrinkFlavor());
             index++;
