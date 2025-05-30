@@ -1,4 +1,4 @@
-package com.java.plurasight;
+package com.java.pluralsight;
 
 public class Toppings extends Item {
     protected String toppingName;

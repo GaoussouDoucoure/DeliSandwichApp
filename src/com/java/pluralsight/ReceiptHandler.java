@@ -1,4 +1,4 @@
-package com.java.plurasight;
+package com.java.pluralsight;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

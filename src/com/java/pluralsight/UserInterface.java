@@ -1,8 +1,8 @@
-package com.java.plurasight;
+package com.java.pluralsight;
 
 import java.util.Scanner;
 
-import static com.java.plurasight.Menu.*;
+import static com.java.pluralsight.Menu.*;
 
 interface Screens {
     static void homeScreen(){}
