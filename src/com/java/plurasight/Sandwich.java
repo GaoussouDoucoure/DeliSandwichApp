@@ -7,12 +7,21 @@ public class Sandwich extends Item {
     String sandwichSize;
     ArrayList<Toppings> sandwichToppings = new ArrayList<>();
     boolean isToasted;
+    String signatureName = null;
 
     public Sandwich(String breadType, String sandwichSize, ArrayList<Toppings> sandwichToppings, boolean isToasted) {
         this.breadType = breadType;
         this.sandwichSize = sandwichSize;
         this.sandwichToppings = sandwichToppings;
         this.isToasted = isToasted;
+    }
+
+    public Sandwich(String breadType, String sandwichSize, ArrayList<Toppings> sandwichToppings, boolean isToasted, String signatureName) {
+        this.breadType = breadType;
+        this.sandwichSize = sandwichSize;
+        this.sandwichToppings = sandwichToppings;
+        this.isToasted = isToasted;
+        this.signatureName = signatureName;
     }
 
     public Sandwich(){
@@ -43,138 +52,93 @@ public class Sandwich extends Item {
         isToasted = toasted;
     }
 
-    public boolean hasAnyMeat(){
-        if(sandwichToppings.isEmpty()){
-            return false;
-        }
-        else {
-            int i = sandwichToppings.size();
-            for (Toppings topping : sandwichToppings){
-                if (topping.isMeat){
-                    i--;
-                }
+    public String getSignatureName() {
+        return signatureName;
+    }
+
+    public void setSignatureName(String signatureName) {
+        this.signatureName = signatureName;
+    }
+
+    public ArrayList<Toppings> getSandwichToppings() {
+        return sandwichToppings;
+    }
+
+    public void setSandwichToppings(ArrayList<Toppings> sandwichToppings) {
+        this.sandwichToppings = sandwichToppings;
+    }
+
+    public boolean hasAnyMeat() {
+        for (Toppings topping : sandwichToppings) {
+            if (topping.isMeat) {
+                return true;
             }
-            return i != sandwichToppings.size();
         }
+        return false;
     }
 
     public boolean hasAnyCheese() {
-        if (sandwichToppings.isEmpty())
-            return false;
-        else {
-            int i = sandwichToppings.size();
-            for (Toppings topping : sandwichToppings) {
-                if (topping.isCheese)
-                    i--;
+        for (Toppings topping : sandwichToppings) {
+            if (topping.isCheese) {
+                return true;
             }
-            return i != sandwichToppings.size();
         }
+        return false;
     }
 
     @Override
-    public double getPrice(){
-        double sandwichPrice = 0;
-        switch (sandwichSize) {
-            case "SMALL":
-                sandwichPrice = 5.50;
-                for (Toppings topping : sandwichToppings) {
-                    if (topping.isMeat && !topping.isExtraMeat)
-                        sandwichPrice += 1.00;
-                    else if (topping.isExtraMeat)
-                        sandwichPrice += 0.50;
-                    else if (topping.isCheese && !topping.isExtraCheese)
-                        sandwichPrice += 0.75;
-                    else if (topping.isExtraCheese)
-                        sandwichPrice += 0.30;
-                }
-            case "MEDIUM":
-                sandwichPrice = 7.00;
-                for (Toppings topping : sandwichToppings) {
-                    if (topping.isMeat && !topping.isExtraMeat)
-                        sandwichPrice += 2.00;
-                    else if (topping.isExtraMeat)
-                        sandwichPrice += 1.00;
-                    else if (topping.isCheese && !topping.isExtraCheese)
-                        sandwichPrice += 1.50;
-                    else if (topping.isExtraCheese)
-                        sandwichPrice += 0.60;
-                }
-            case "LARGE":
-                sandwichPrice = 8.50;
-                for (Toppings topping : sandwichToppings) {
-                    if (topping.isMeat && !topping.isExtraMeat) {
-                        sandwichPrice += 3.00;
-                    }
-                    else if (topping.isExtraMeat) {
-                        sandwichPrice += 1.50;
-                    }
-                    else if (topping.isCheese && !topping.isExtraCheese) {
-                        sandwichPrice += 2.25;
-                    }
-                    else if (topping.isExtraCheese) {
-                        sandwichPrice += 0.90;
-                    }
-                }
+    public double getPrice() {
+        double sandwichPrice = switch (sandwichSize) {
+            case "SMALL" -> 5.50;
+            case "MEDIUM" -> 7.00;
+            case "LARGE" -> 8.50;
+            default -> 0.0;
+        };
+
+        for (Toppings topping : sandwichToppings) {
+            if (sandwichSize.equals("SMALL")) {
+                if (topping.isMeat) sandwichPrice += topping.isExtraMeat ? 0.50 : 1.00;
+                else if (topping.isCheese) sandwichPrice += topping.isExtraCheese ? 0.30 : 0.75;
+            } else if (sandwichSize.equals("MEDIUM")) {
+                if (topping.isMeat) sandwichPrice += topping.isExtraMeat ? 1.00 : 2.00;
+                else if (topping.isCheese) sandwichPrice += topping.isExtraCheese ? 0.60 : 1.50;
+            } else if (sandwichSize.equals("LARGE")) {
+                if (topping.isMeat) sandwichPrice += topping.isExtraMeat ? 1.50 : 3.00;
+                else if (topping.isCheese) sandwichPrice += topping.isExtraCheese ? 0.90 : 2.25;
+            }
         }
+
         return sandwichPrice;
     }
 
+
     @Override
-    public String toString(){
-        if (isToasted()) {
-            if (sandwichToppings.isEmpty() && sandwichSize.equals("MEDIUM")) {
-                return "Signature: BLT Sandwich" + "\n" +
-                        "Size: MEDIUM 8\"\n" +
-                        "Bread: " + (breadType.equals("White Bread")) + "\n" +
-                        "Toppings: Bacon, Cheddar, Lettuce, Tomato, Ranch\n" +
-                        "Toasted" + "\n";
-            } else if (!sandwichToppings.isEmpty() && sandwichSize.equals("MEDIUM")) {
-                return "Signature: Philly Cheese Steak" + "\n" +
-                        "Size: MEDIUM 8\"\n" +
-                        "Bread: " + (breadType.equals("White Bread")) + "\n" +
-                        "Toppings: Steak, American Cheese, Peppers, Mayo\n" +
-                        "Toasted" + "\n";
-            } else {
-                if (sandwichToppings.isEmpty()) {
-                    return "Size: " + sandwichSize + "\n" +
-                            "Bread: " + breadType + "\n" +
-                            "No Toppings" + "\n" +
-                            "Toasted\n";
-                } else {
-                    return "Size: " + sandwichSize + "\n" +
-                            "Bread: " + breadType + "\n" +
-                            "Toppings: " + sandwichToppings + "\n" +
-                            "Toasted\n";
+    public String toString() {
+        String result = "";
+
+        if (signatureName != null) {
+            result += "Signature: " + signatureName + " Sandwich\n";
+        }
+
+        result += "Size: " + sandwichSize + " 8\"\n";
+        result += "Bread: " + breadType + "\n";
+
+        if (sandwichToppings.isEmpty()) {
+            result += "No Toppings\n";
+        } else {
+            result += "Toppings: ";
+            for (int i = 0; i < sandwichToppings.size(); i++) {
+                result += sandwichToppings.get(i).toppingName;
+                if (i < sandwichToppings.size() - 1) {
+                    result += ", ";
                 }
             }
+            result += "\n";
         }
-        else {
-            if (sandwichToppings.isEmpty() && sandwichSize.equals("MEDIUM")) {
-                return "Signature: BLT Sandwich" + "\n" +
-                        "Size: MEDIUM 8\"\n" +
-                        "Bread: " + (breadType.equals("White Bread")) + "\n" +
-                        "Toppings: Bacon, Cheddar, Lettuce, Tomato, Ranch\n" +
-                        "Not Toasted" + "\n";
-            } else if (!sandwichToppings.isEmpty() && sandwichSize.equals("MEDIUM")) {
-                return "Signature: Philly Cheese Steak" + "\n" +
-                        "Size: MEDIUM 8\"\n" +
-                        "Bread: " + (breadType.equals("White Bread")) + "\n" +
-                        "Toppings: Steak, American Cheese, Peppers, Mayo\n" +
-                        "Not Toasted" + "\n";
-            } else {
-                if (sandwichToppings.isEmpty()) {
-                    return "Size: " + sandwichSize + "\n" +
-                            "Bread: " + breadType + "\n" +
-                            "No Toppings" + "\n" +
-                            "Not Toasted\n";
-                } else {
-                    return "Size: " + sandwichSize + "\n" +
-                            "Bread: " + breadType + "\n" +
-                            "Toppings: " + sandwichToppings + "\n" +
-                            "Not Toasted\n";
-                }
-            }
-        }
+
+        result += isToasted ? "Toasted\n" : "Not Toasted\n";
+
+        return result;
     }
 
 }
