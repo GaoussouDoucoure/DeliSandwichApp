@@ -83,41 +83,56 @@ public class ReceiptHandler {
         int sandCount = 1;
         int drinkCount = 1;
         int chipsCount = 1;
+
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             writer.write("Order Receipt");
             writer.newLine();
             writer.write("Date: " + timeStamp);
             writer.newLine();
             writer.newLine();
-            writer.write("Your Order: ");
+            writer.write("Your Order:");
             writer.newLine();
+
             for (Item item : cart) {
+                writer.newLine(); // extra spacing between items
+                String[] lines = item.toString().split("\n");
+
                 switch (item.getClass().getSimpleName()) {
                     case "Sandwich" -> {
+                        writer.write("Sandwich (" + sandCount + ")");
                         writer.newLine();
-                        writer.write("Sandwich (" + sandCount + ") \n\t" + item);
                         sandCount++;
                     }
                     case "Drink" -> {
+                        writer.write("Drink (" + drinkCount + ")");
                         writer.newLine();
-                        writer.write("Drink (" + drinkCount + ") \n\t" + item);
                         drinkCount++;
                     }
                     default -> {
+                        writer.write("Chips (" + chipsCount + ")");
                         writer.newLine();
-                        writer.write("Chips (" + chipsCount + ") \n\t" + item);
                         chipsCount++;
                     }
                 }
+
+                for (String line : lines) {
+                    writer.write("\t" + line);
+                    writer.newLine();
+                }
             }
+
             writer.newLine();
             writer.write("Your Order Total is $" + df.format(getTotal()));
             writer.newLine();
             writer.write("We appreciate your visit! Hope to serve you again soon!");
-            System.out.println("\n***** Thank you for your purchase! ***** \n\n=> Your receipt is located at: " + fileName + " <=");
+
+            System.out.println("\n***** Thank you for your purchase! *****");
+            System.out.println("\n=> Your receipt is located at: " + fileName + " <=");
+
         } catch (IOException e) {
             System.err.println("\nError generating receipt: " + e.getMessage());
         }
     }
+
 
 }
