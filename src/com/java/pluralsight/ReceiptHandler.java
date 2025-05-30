@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
+import static com.java.pluralsight.Item.getTotal;
+import static com.java.pluralsight.UserInterface.orderScreen;
+
 public class ReceiptHandler {
     private static final String FILE_DIRECTORY = "Receipts/";
     static DecimalFormat df = new DecimalFormat("#.00");
@@ -39,7 +42,7 @@ public class ReceiptHandler {
             }
 
         }
-        System.out.print("Checkout Total: $" + df.format(Item.getTotal()) + "\nUser Input:");
+        System.out.print("Checkout Total: $" + df.format(getTotal()) + "\nUser Input:");
         System.out.println("""
         Please select an option
         [1] Confirm
@@ -54,7 +57,7 @@ public class ReceiptHandler {
             }
             case "2" -> {
                 System.out.println("\nYou chose to cancel the checkout! Going back to the Order Screen..\n");
-                UserInterface.orderScreen();
+                orderScreen();
             }
             default -> {
                 System.out.printf("\nYou entered an invalid option for Checkout: %s. Please try again!\n\n", checkoutChoice);
@@ -97,7 +100,7 @@ public class ReceiptHandler {
                 }
             }
             writer.newLine();
-            writer.write("Your Order Total is $" + df.format(Item.getTotal()));
+            writer.write("Your Order Total is $" + df.format(getTotal()));
             writer.newLine();
             writer.write("We appreciate your visit! Hope to serve you again soon!");
             System.out.println("\n\"Thank you for your purchase! \n\nYour receipt is located at: " + fileName);

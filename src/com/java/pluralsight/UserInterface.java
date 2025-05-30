@@ -2,12 +2,15 @@ package com.java.pluralsight;
 
 import java.util.Scanner;
 
+import static com.java.pluralsight.Toppings.*;
 import static com.java.pluralsight.Menu.*;
+import static com.java.pluralsight.Sandwich.cart;
+import static com.java.pluralsight.ReceiptHandler.displayOrderDetails;
+import static com.java.pluralsight.Drink.drinkFlavors;
+import static com.java.pluralsight.Drink.toStringDrinkFlavors;
+import static com.java.pluralsight.Chips.chipFlavors;
+import static com.java.pluralsight.Chips.toStringChipFlavors;
 
-interface Screens {
-    static void homeScreen(){}
-    static void orderScreen(){}
-}
 public class UserInterface implements Screens {
     public static Scanner sc = new Scanner(System.in);
 
@@ -193,36 +196,36 @@ public class UserInterface implements Screens {
             //Topping menu
             switch (toppingsSelection) {
                 case "1" -> {
-                    Toppings.toStringRegularToppings();
+                    toStringRegularToppings();
                     System.out.print("\nPlease select a number for your topping choice: ");
                     String regToppingChoice = sc.nextLine().trim();
-                    sandwich.sandwichToppings.add(Menu.regularToppings.get(Integer.parseInt(regToppingChoice) - 1));
+                    sandwich.sandwichToppings.add(regularToppings.get(Integer.parseInt(regToppingChoice) - 1));
                     anotherTopping(sandwich);
                 }
                 case "2" -> {
-                    Toppings.toStringMeatToppings();
+                    toStringMeatToppings();
                     System.out.print("\nPlease select a number for your topping choice: ");
                     String meatToppingChoice = sc.nextLine().trim();
                     for (Toppings toppings : sandwich.sandwichToppings) {
                         if (toppings.isMeat) {
-                            Menu.premiumMeatToppings.get(Integer.parseInt(meatToppingChoice)  - 1).setExtraMeat(true);
+                            premiumMeatToppings.get(Integer.parseInt(meatToppingChoice)  - 1).setExtraMeat(true);
                             break;
                         }
                     }
-                    sandwich.sandwichToppings.add((Menu.premiumMeatToppings.get(Integer.parseInt(meatToppingChoice) - 1)));
+                    sandwich.sandwichToppings.add((premiumMeatToppings.get(Integer.parseInt(meatToppingChoice) - 1)));
                     anotherTopping(sandwich);
                 }
                 case "3" -> {
-                    Toppings.toStringCheeseToppings();
+                    toStringCheeseToppings();
                     System.out.print("\nPlease select a number for your topping choice: ");
                     String cheeseToppingChoice = sc.nextLine().trim();
                     for (Toppings toppings : sandwich.sandwichToppings) {
                         if (toppings.isCheese) {
-                            Menu.premiumCheeseToppings.get(Integer.parseInt(cheeseToppingChoice) - 1).setExtraCheese(true);
+                            premiumCheeseToppings.get(Integer.parseInt(cheeseToppingChoice) - 1).setExtraCheese(true);
                             break;
                         }
                     }
-                    sandwich.sandwichToppings.add((Menu.premiumCheeseToppings.get(Integer.parseInt(cheeseToppingChoice) - 1)));
+                    sandwich.sandwichToppings.add((premiumCheeseToppings.get(Integer.parseInt(cheeseToppingChoice) - 1)));
                     anotherTopping(sandwich);
                 }
                 case "4" -> System.out.println("\nExiting Toppings Selection..");
@@ -316,9 +319,9 @@ public class UserInterface implements Screens {
                     addDrink();
                 }
             }
-            Drink.toStringDrinkFlavors();
+            toStringDrinkFlavors();
             System.out.print("\nPlease select a number for the size of your Drink: ");
-            String flavourChoice = (Drink.drinkFlavors.get((Integer.parseInt(sc.nextLine().trim())) - 1)).getDrinkFlavor();
+            String flavourChoice = (drinkFlavors.get((Integer.parseInt(sc.nextLine().trim())) - 1)).getDrinkFlavor();
             System.out.print("""
             Would you like Ice in your Drink? (1 or 2)
             [1] Yes
@@ -348,9 +351,9 @@ public class UserInterface implements Screens {
 
     public static void addChips() {
         try {
-            Chips.toStringChipFlavors();
+            toStringChipFlavors();
             System.out.print("\nPlease select a number for your Chips choice: ");
-            String chipsChoice = (Chips.chipFlavors.get((Integer.parseInt(sc.nextLine().trim())) - 1)).getChipType();
+            String chipsChoice = (chipFlavors.get((Integer.parseInt(sc.nextLine().trim())) - 1)).getChipType();
             Chips chips = new Chips(chipsChoice);
             addToCart(chips);
             System.out.println("\n*** Chips successfully added! Now returning to the main menu ***");
@@ -362,11 +365,11 @@ public class UserInterface implements Screens {
     }
 
     public static void addToCart(Item newItem) {
-        Item.cart.add(newItem);
+        cart.add(newItem);
     }
 
     public static void checkOut() {
-        ReceiptHandler.displayOrderDetails(Item.cart);
+        displayOrderDetails(cart);
     }
 
 }
