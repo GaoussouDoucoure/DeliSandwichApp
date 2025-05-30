@@ -11,7 +11,7 @@ import static com.java.pluralsight.UserInterface.homeScreen;
 public class MenuHandler {
     public static void menuHandler() {
         try {
-            FileReader fr = new FileReader("Menu.csv");
+            FileReader fr = new FileReader("Files/Menu.csv");
             BufferedReader br = new BufferedReader(fr);
             String indexInfo;
             boolean isFirst;
