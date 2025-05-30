@@ -48,7 +48,7 @@ public class UserInterface implements Screens {
             case "2" -> System.out.println("addSignatureSandwich method");
             case "3" -> System.out.println("addDrink method");
             case "4" -> System.out.println("addChips method");
-            case "5" -> System.out.println("addCheckout method");//todo checkout()
+            case "5" -> System.out.println("addCheckout method");
             case "0" -> {
                 System.out.println("\nclear the cart and go back to Home Screen\n");
                 homeScreen();
@@ -361,7 +361,7 @@ public class UserInterface implements Screens {
     }
 
     public static void checkOut() {
-        //todo Display Order Details
+        ReceiptHandler.displayOrderDetails(Item.cart);
     }
 
 }
