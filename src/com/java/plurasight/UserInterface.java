@@ -1,3 +1,5 @@
+package com.java.plurasight;
+
 import java.util.Scanner;
 
 interface Screens {
