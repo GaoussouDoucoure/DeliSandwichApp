@@ -285,6 +285,21 @@ public class UserInterface implements Screens {
         """);
         System.out.print("Please select an option: ");
         String toastedChoice = sc.nextLine().trim();
+        boolean isToasted = true;
+
+        switch (toastedChoice) {
+            case "1" -> {
+            }
+            case "2" -> isToasted = false;
+            default -> {
+                System.out.printf("\nYou entered an invalid option: %s. Please try again!\n\n", choice);
+                addSignatureSandwich();
+            }
+        }
+        signatureSandwich.setToasted(isToasted);
+        addToCart(signatureSandwich);
+        System.out.println("\nSandwich successfully added! Now returning to the Order Screen.");
+        orderScreen();
     }
 
     public static void addDrink() {
