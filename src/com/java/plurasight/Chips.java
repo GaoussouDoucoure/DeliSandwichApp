@@ -1,6 +1,8 @@
+package com.java.plurasight;
+
 import java.util.ArrayList;
 
-public class Chips extends Item{
+public class Chips extends Item {
     protected String chipsType;
     static ArrayList<Chips> chipFlavors = new ArrayList<>();
 

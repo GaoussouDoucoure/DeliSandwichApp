@@ -1,3 +1,5 @@
+package com.java.plurasight;
+
 public class Toppings extends Item {
     protected String toppingName;
     protected boolean isMeat;

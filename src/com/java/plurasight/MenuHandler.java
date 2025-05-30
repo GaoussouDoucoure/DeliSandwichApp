@@ -1,8 +1,10 @@
+package com.java.plurasight;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 
 public class MenuHandler {
-    public static void menuReader() {
+    public static void menuhandler() {
         try {
             FileReader fr = new FileReader("Menu.csv");
             BufferedReader br = new BufferedReader(fr);
