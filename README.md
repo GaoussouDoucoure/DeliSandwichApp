@@ -46,6 +46,6 @@ Douc Deli Sandwich Shop is a **Java-based application** that allows users to **c
 ### Receipt Detail
 ![Screenshot 2025-05-30 083056](https://github.com/user-attachments/assets/bf93501d-a6d3-4baa-8333-e492eca0a64b)
 
-
-
-
+### Interesting Code
+![image](https://github.com/user-attachments/assets/c217de29-df63-47cb-afe5-74464b1a5907)
+This code sorts the cart list based on the class names of the items in it (like Sandwich, Drink, or Chips) in alphabetical order, ignoring case sensitivity.
