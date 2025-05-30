@@ -13,7 +13,7 @@ import static com.java.pluralsight.Item.getTotal;
 import static com.java.pluralsight.UserInterface.orderScreen;
 
 public class ReceiptHandler {
-    private static final String FILE_DIRECTORY = "Receipts/";
+    private static final String FILE_DIRECTORY = "Files/Receipts/";
     static DecimalFormat df = new DecimalFormat("#.00");
 
     public static void displayOrderDetails(ArrayList<Item> cart) {
