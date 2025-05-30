@@ -46,11 +46,11 @@ public class UserInterface implements Screens {
         String choice = sc.nextLine().trim();
 
         switch (choice){
-            case "1" -> System.out.println("addCustomSandwich method");
-            case "2" -> System.out.println("addSignatureSandwich method");
-            case "3" -> System.out.println("addDrink method");
-            case "4" -> System.out.println("addChips method");
-            case "5" -> System.out.println("addCheckout method");
+            case "1" -> addCustomSandwich();
+            case "2" -> addSignatureSandwich();
+            case "3" -> addDrink();
+            case "4" -> addChips();
+            case "5" -> checkOut();
             case "0" -> {
                 System.out.println("\nclear the cart and go back to Home Screen\n");
                 homeScreen();
@@ -285,6 +285,21 @@ public class UserInterface implements Screens {
         """);
         System.out.print("Please select an option: ");
         String toastedChoice = sc.nextLine().trim();
+        boolean isToasted = true;
+
+        switch (toastedChoice) {
+            case "1" -> {
+            }
+            case "2" -> isToasted = false;
+            default -> {
+                System.out.printf("\nYou entered an invalid option: %s. Please try again!\n\n", choice);
+                addSignatureSandwich();
+            }
+        }
+        signatureSandwich.setToasted(isToasted);
+        addToCart(signatureSandwich);
+        System.out.println("\nSandwich successfully added! Now returning to the Order Screen.");
+        orderScreen();
     }
 
     public static void addDrink() {
