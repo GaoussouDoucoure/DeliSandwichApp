@@ -2,6 +2,9 @@ package com.java.plurasight;
 
 import java.util.Scanner;
 
+import static com.java.plurasight.Menu.bltSandwich;
+import static com.java.plurasight.Menu.pcsSandwich;
+
 interface Screens {
     static void homeScreen(){}
     static void orderScreen(){}
@@ -268,37 +271,19 @@ public class UserInterface implements Screens {
         String choice = sc.nextLine().trim();
         switch (choice){
             case "1" -> {
-                System.out.println("signatureSandwich = bltSandwich;");
+                signatureSandwich = bltSandwich;
             }
             case "2" -> {
-                System.out.println("signatureSandwich = pcsSandwich;");
+                signatureSandwich = pcsSandwich;
             }
             default -> {
                 System.out.printf("\nYou entered an invalid option: %s. Please try again!\n\n", choice);
                 addSignatureSandwich();
             }
         }
-        System.out.println("""
-        Would you like your sandwich toasted?
-        [1] Toasted
-        [2] Not Toasted
-        """);
-        System.out.print("Please select an option: ");
-        String toastedChoice = sc.nextLine().trim();
-        boolean isToasted = true;
 
-        switch (toastedChoice) {
-            case "1" -> {
-            }
-            case "2" -> isToasted = false;
-            default -> {
-                System.out.printf("\nYou entered an invalid option: %s. Please try again!\n\n", choice);
-                addSignatureSandwich();
-            }
-        }
-        signatureSandwich.setToasted(isToasted);
         addToCart(signatureSandwich);
-        System.out.println("\nSandwich successfully added! Now returning to the Order Screen.");
+        System.out.println("\nSandwich successfully added! Now returning to the Order Screen..");
         orderScreen();
     }
 
