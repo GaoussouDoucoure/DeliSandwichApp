@@ -1,5 +1,6 @@
 package com.java.pluralsight;
 
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 import static com.java.pluralsight.Toppings.*;
@@ -60,9 +61,31 @@ public class UserInterface implements Screens {
             case "4" -> addChips();
             case "5" -> checkOut();
             case "0" -> {
-                cancelOrder();
-                System.out.println("\n*** Going back to the Home Screen.. ***\n");
-                homeScreen();
+                System.out.println("""
+                        
+                        You chose to cancel your order!
+                        This option will clear out your cart.
+                        [1] Confirm
+                        [2] Go back
+                        """);
+                System.out.print("Enter an option to proceed: ");
+                String cancelChoice = sc.nextLine().trim();
+                switch (cancelChoice){
+                    case "1" -> {
+                        cancelOrder();
+                        System.out.println("\n*** Going back to the Home Screen.. ***\n");
+                        homeScreen();
+                    }
+                    case "2" -> {
+                        System.out.println("\n*** Going back to the Order Screen.. ***\n");
+                        orderScreen();
+                    }
+                    default -> {
+                        System.out.printf("\n*** Going back to the Order Screen.. ***");
+                        orderScreen();
+                    }
+                }
+
             }
             default -> {
                 System.out.printf("\nYou entered an invalid option: %s. Please try again!\n\n", choice);
@@ -392,7 +415,7 @@ public class UserInterface implements Screens {
 
     public static void cancelOrder() {
         cart.clear();
-        System.out.println("Your order has been canceled and the cart is now empty.");
+        System.out.println("\nYour order has been canceled and the cart is now empty.");
     }
 
 
