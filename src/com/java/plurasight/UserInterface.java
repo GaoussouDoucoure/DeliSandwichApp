@@ -2,8 +2,7 @@ package com.java.plurasight;
 
 import java.util.Scanner;
 
-import static com.java.plurasight.Menu.bltSandwich;
-import static com.java.plurasight.Menu.pcsSandwich;
+import static com.java.plurasight.Menu.*;
 
 interface Screens {
     static void homeScreen(){}
@@ -266,6 +265,7 @@ public class UserInterface implements Screens {
                 
                 [1] BLT Sandwich
                 [2] Philly Cheese Steak
+                [3] Chicken Teriyaki
                 """);
         System.out.print("Select a signature sandwich: ");
         String choice = sc.nextLine().trim();
@@ -275,6 +275,9 @@ public class UserInterface implements Screens {
             }
             case "2" -> {
                 signatureSandwich = pcsSandwich;
+            }
+            case "3" -> {
+                signatureSandwich = ctSandwich;
             }
             default -> {
                 System.out.printf("\nYou entered an invalid option: %s. Please try again!\n\n", choice);
