@@ -2,6 +2,15 @@ package com.java.plurasight;
 
 import java.util.Scanner;
 
+import static com.java.plurasight.Chips.chipFlavors;
+import static com.java.plurasight.Chips.toStringChipFlavors;
+import static com.java.plurasight.Drink.drinkFlavors;
+import static com.java.plurasight.Drink.toStringDrinkFlavors;
+import static com.java.plurasight.Menu.*;
+import static com.java.plurasight.ReceiptHandler.displayOrderDetails;
+import static com.java.plurasight.Sandwich.cart;
+import static com.java.plurasight.Toppings.*;
+
 interface Screens {
     static void homeScreen(){}
     static void orderScreen(){}
@@ -46,11 +55,11 @@ public class UserInterface implements Screens {
         String choice = sc.nextLine().trim();
 
         switch (choice){
-            case "1" -> System.out.println("addCustomSandwich method");
-            case "2" -> System.out.println("addSignatureSandwich method");
-            case "3" -> System.out.println("addDrink method");
-            case "4" -> System.out.println("addChips method");
-            case "5" -> System.out.println("addCheckout method");
+            case "1" -> addCustomSandwich();
+            case "2" -> addSignatureSandwich();
+            case "3" -> addDrink();
+            case "4" -> addChips();
+            case "5" -> checkOut();
             case "0" -> {
                 System.out.println("\nclear the cart and go back to Home Screen\n");
                 homeScreen();
