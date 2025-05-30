@@ -1,4 +1,6 @@
-package com.java.plurasight;
+package com.java.pluralsight;
+
+import static com.java.pluralsight.Menu.*;
 
 public class Toppings extends Item {
     protected String toppingName;
@@ -57,8 +59,8 @@ public class Toppings extends Item {
     
     public static void toStringRegularToppings(){
         int i = 1;
-        System.out.println("List of Regular Toppings: ");
-        for(Toppings topping : Menu.regularToppings){
+        System.out.println("\nList of Regular Toppings: ");
+        for(Toppings topping : regularToppings){
             System.out.println(i + ".) " + topping.getToppingName());
             i++;
         }
@@ -66,8 +68,8 @@ public class Toppings extends Item {
 
     public static void toStringMeatToppings() {
         int i = 1;
-        System.out.println("List of Premium Meat Toppings: ");
-        for (Toppings topping : Menu.premiumMeatToppings) {
+        System.out.println("\nList of Premium Meat Toppings: ");
+        for (Toppings topping : premiumMeatToppings) {
             System.out.println(i + ".) " + topping.getToppingName());
             i++;
 
@@ -76,8 +78,8 @@ public class Toppings extends Item {
 
     public static void toStringCheeseToppings() {
         int i = 1;
-        System.out.println("List of Premium Cheese Toppings: ");
-        for (Toppings topping : Menu.premiumCheeseToppings) {
+        System.out.println("\nList of Premium Cheese Toppings: ");
+        for (Toppings topping : premiumCheeseToppings) {
             System.out.println(i + ".) " + topping.getToppingName());
             i++;
 

@@ -1,12 +1,17 @@
-package com.java.plurasight;
+package com.java.pluralsight;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 
+import static com.java.pluralsight.Menu.*;
+import static com.java.pluralsight.Chips.chipFlavors;
+import static com.java.pluralsight.Drink.drinkFlavors;
+import static com.java.pluralsight.UserInterface.homeScreen;
+
 public class MenuHandler {
-    public static void menuhandler() {
+    public static void menuHandler() {
         try {
-            FileReader fr = new FileReader("Menu.csv");
+            FileReader fr = new FileReader("Files/Menu.csv");
             BufferedReader br = new BufferedReader(fr);
             String indexInfo;
             boolean isFirst;
@@ -19,8 +24,8 @@ public class MenuHandler {
                         for (String newTopping : splitLine) {
                             if (!isFirst) {
                                 Toppings newRegularTopping = new Toppings(newTopping, false, false, false, false);
-                                Menu.regularToppings.add(newRegularTopping);
-                                Menu.allToppings.add(newRegularTopping);
+                                regularToppings.add(newRegularTopping);
+                                allToppings.add(newRegularTopping);
                             } else
                                 isFirst = false;
                         }
@@ -31,8 +36,8 @@ public class MenuHandler {
                         for (String newTopping : splitLine) {
                             if (!isFirst) {
                                 Toppings newMeatTopping = new Toppings(newTopping, true, false, false, false);
-                                Menu.premiumMeatToppings.add(newMeatTopping);
-                                Menu.allToppings.add(newMeatTopping);
+                                premiumMeatToppings.add(newMeatTopping);
+                                allToppings.add(newMeatTopping);
                             } else
                                 isFirst = false;
                         }
@@ -43,8 +48,8 @@ public class MenuHandler {
                         for (String newTopping : splitLine) {
                             if (!isFirst) {
                                 Toppings newCheeseTopping = new Toppings(newTopping, false, false, true, false);
-                                Menu.premiumCheeseToppings.add(newCheeseTopping);
-                                Menu.allToppings.add(newCheeseTopping);
+                                premiumCheeseToppings.add(newCheeseTopping);
+                                allToppings.add(newCheeseTopping);
                             } else
                                 isFirst = false;
                         }
@@ -55,7 +60,7 @@ public class MenuHandler {
                         for (String drinkName : splitLine) {
                             if (!isFirst) {
                                 Drink newDrink = new Drink(drinkName);
-                                Drink.drinkFlavors.add(newDrink);
+                                drinkFlavors.add(newDrink);
                             } else
                                 isFirst = false;
                         }
@@ -66,7 +71,7 @@ public class MenuHandler {
                         for (String chipName : splitLine) {
                             if (!isFirst) {
                                 Chips newChips = new Chips(chipName);
-                                Chips.chipFlavors.add(newChips);
+                                chipFlavors.add(newChips);
                             } else
                                 isFirst = false;
                         }
@@ -74,7 +79,7 @@ public class MenuHandler {
                     }
                 }
             }
-            UserInterface.homeScreen();
+            homeScreen();
         } catch (Exception fileError) {
             System.out.println("Oops something went wrong with the current file path. Please try again.");
             fileError.printStackTrace();

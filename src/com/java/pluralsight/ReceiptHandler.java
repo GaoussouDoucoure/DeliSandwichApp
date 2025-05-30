@@ -1,4 +1,4 @@
-package com.java.plurasight;
+package com.java.pluralsight;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -9,8 +9,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
+import static com.java.pluralsight.Item.getTotal;
+import static com.java.pluralsight.UserInterface.orderScreen;
+
 public class ReceiptHandler {
-    private static final String FILE_DIRECTORY = "Receipts/";
+    private static final String FILE_DIRECTORY = "Files/Receipts/";
     static DecimalFormat df = new DecimalFormat("#.00");
 
     public static void displayOrderDetails(ArrayList<Item> cart) {
@@ -20,27 +23,38 @@ public class ReceiptHandler {
         int sandCount = 1;
         int drinkCount = 1;
         int chipsCount = 1;
-        System.out.println("\nPlease Check Your Order Details. Enter CONFIRM to finalize or CANCEL to modify.");
+        System.out.println("\n*** Please Check Your Order Details. Enter CONFIRM to finalize or CANCEL to go back to the previous screen. ***");
         System.out.println("\nYour Order Details: ");
         for (Item item : cart) {
+            String[] lines = item.toString().split("\n");
+
             switch (item.getClass().getSimpleName()) {
                 case "Sandwich" -> {
-                    System.out.println("\nSandwich (" + sandCount + ") \n\t" + item);
+                    System.out.println("\nSandwich (" + sandCount + ")");
+                    for (String line : lines) {
+                        System.out.println("\t" + line);
+                    }
                     sandCount++;
                 }
                 case "Drink" -> {
-                    System.out.println("\nDrink (" + drinkCount + ") \n\t" + item);
+                    System.out.println("\nDrink (" + drinkCount + ")");
+                    for (String line : lines) {
+                        System.out.println("\t" + line);
+                    }
                     drinkCount++;
                 }
                 default -> {
-                    System.out.println("\nChips (" + chipsCount + ") \n\t" + item);
+                    System.out.println("\nChips (" + chipsCount + ")");
+                    for (String line : lines) {
+                        System.out.println("\t" + line);
+                    }
                     chipsCount++;
                 }
             }
-
         }
-        System.out.print("Checkout Total: $" + df.format(Item.getTotal()) + "\nUser Input:");
+        System.out.print("\nCheckout Total: $" + df.format(getTotal()));
         System.out.println("""
+        
         Please select an option
         [1] Confirm
         [2] Cancel
@@ -53,8 +67,8 @@ public class ReceiptHandler {
                 saveReceipt(cart);
             }
             case "2" -> {
-                System.out.println("\nYou chose to cancel the checkout! Going back to the Order Screen..\n");
-                UserInterface.orderScreen();
+                System.out.println("\nGoing back to the Order Screen..\n");
+                orderScreen();
             }
             default -> {
                 System.out.printf("\nYou entered an invalid option for Checkout: %s. Please try again!\n\n", checkoutChoice);
@@ -97,10 +111,10 @@ public class ReceiptHandler {
                 }
             }
             writer.newLine();
-            writer.write("Your Order Total is $" + df.format(Item.getTotal()));
+            writer.write("Your Order Total is $" + df.format(getTotal()));
             writer.newLine();
             writer.write("We appreciate your visit! Hope to serve you again soon!");
-            System.out.println("\n\"Thank you for your purchase! \n\nYour receipt is located at: " + fileName);
+            System.out.println("\n***** Thank you for your purchase! ***** \n\n=> Your receipt is located at: " + fileName + " <=");
         } catch (IOException e) {
             System.err.println("\nError generating receipt: " + e.getMessage());
         }
